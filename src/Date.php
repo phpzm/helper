@@ -2,8 +2,8 @@
 
 namespace Simples\Helper;
 
-use DateTime;
 use DateInterval;
+use DateTime;
 
 /**
  * Class Date
@@ -71,7 +71,28 @@ class Date extends DateTime
      */
     public static function nextMonth(string $date, int $months): string
     {
-        return date('Y-m-d', strtotime($date . " +" . $months . " month"));
+        $base = DateTime::createFromFormat(static::$format, $date);
+        $year = $base->format('Y');
+        $month = $base->format('n');
+        $day = $base->format('d');
+
+        $year += floor($months / 12);
+        $months = $months % 12;
+        $month += $months;
+        if ($month > 12) {
+            $year++;
+            $month = $month % 12;
+            if ($month === 0) {
+                $month = 12;
+            }
+        }
+
+        $next = DateTime::createFromFormat('Y-m-d', $year . '-' . $month . '-' . $day);
+        if (!checkdate($month, $day, $year)) {
+            $next = DateTime::createFromFormat('Y-m-j', $year . '-' . $month . '-1');
+            $next->modify('last day of');
+        }
+        return $next->format(static::$format);
     }
 
     /**
