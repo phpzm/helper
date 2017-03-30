@@ -25,7 +25,7 @@ class Date extends DateTime
     {
         parent::__construct($time);
 
-        static::$format = of($format, static::$format);
+        static::$format = coalesce($format, static::$format);
     }
 
     /**
