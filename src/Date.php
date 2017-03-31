@@ -116,8 +116,6 @@ class Date extends DateTime
     }
 
     /**
-     * @SuppressWarnings("BooleanArgumentFlag")
-     *
      * @param string $compare
      * @param bool $absolute
      * @return int
