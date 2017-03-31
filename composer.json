@@ -24,7 +24,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "phpzm/kernel": "dev-master"
+    "phpzm/kernel": ">=1.0.4"
   },
   "autoload": {
     "psr-4": {
