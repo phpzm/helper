@@ -29,12 +29,21 @@ abstract class File
     /**
      * @param $filename
      * @param $content
-     * @return int|null
+     * @param bool $append
+     * @return int
      */
-    public static function write($filename, $content)
+    public static function write($filename, $content, $append = false)
     {
         if (Directory::make(dirname($filename))) {
-            return file_put_contents($filename, $content);
+            if (gettype($content) !== TYPE_STRING) {
+                $content = json_encode($content);
+            }
+            $flags = 0;
+            if ($append) {
+                $content = $content . PHP_EOL;
+                $flags = FILE_APPEND;
+            }
+            return file_put_contents($filename, $content, $flags);
         }
         return null;
     }
