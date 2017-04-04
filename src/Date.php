@@ -60,8 +60,8 @@ class Date extends DateTime
      */
     public static function isDate($date)
     {
-        $temp = self::createFromFormat(static::$format, $date);
-        return $temp && $temp->format(static::$format) === $date;
+        $base = self::createFromFormat(static::$format, $date);
+        return $base && checkdate($base->format('n'), $base->format('d'), $base->format('Y'));
     }
 
     /**
