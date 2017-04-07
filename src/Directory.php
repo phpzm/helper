@@ -72,16 +72,15 @@ abstract class Directory
     public static function getFiles(string $dir): array
     {
         $files = [];
-
         if (self::exists($dir)) {
-            foreach (new DirectoryIterator($dir) as $fileInfo) {
-                if ($fileInfo->isDot()) {
-                    continue;
-                }
-                $files[] = $fileInfo->getRealPath();
-            }
+            return $files;
         }
-
+        foreach (new DirectoryIterator($dir) as $fileInfo) {
+            if ($fileInfo->isDot()) {
+                continue;
+            }
+            $files[] = $fileInfo->getRealPath();
+        }
         return $files;
     }
 }
