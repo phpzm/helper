@@ -34,4 +34,20 @@ abstract class Text
     {
         return str_pad($input, $length, $char, $type);
     }
+
+    /**
+     * @param string $text
+     * @param array $record
+     * @return string
+     */
+    public static function replacement(string $text, array $record): string
+    {
+        foreach ($record as $key => $value) {
+            if (!is_scalar($value)) {
+                continue;
+            }
+            $text = static::replace($text, '{' . $key . '}', $value);
+        }
+        return $text;
+    }
 }
