@@ -24,6 +24,25 @@ abstract class Text
     }
 
     /**
+     * @param $pattern
+     * @param $replacement
+     * @param $subject
+     * @param int $limit
+     * @param null $count
+     * @return mixed
+     */
+    public static function replacex($pattern, $replacement, $subject, $limit = -1, &$count = null)
+    {
+        if ($limit) {
+            if (!$count) {
+                $count = 0;
+            }
+            return preg_replace($pattern, $replacement, $subject, $limit, $count);
+        }
+        return preg_replace($pattern, $replacement, $subject);
+    }
+
+    /**
      * @param string $input
      * @param string $length
      * @param string $char (null)
@@ -46,7 +65,7 @@ abstract class Text
             if (!is_scalar($value)) {
                 continue;
             }
-            $text = static::replace($text, '{' . $key . '}', $value);
+            $text = static::replace($text, '{' . $key . '}', parse($value));
         }
         return $text;
     }
