@@ -14,7 +14,7 @@ class Date extends DateTime
     /**
      * @var string
      */
-    private static $format = 'Y-m-d';
+    protected static $format = 'Y-m-d';
 
     /**
      * Date constructor.
@@ -58,7 +58,7 @@ class Date extends DateTime
      * @param $date
      * @return bool
      */
-    public static function isDate($date)
+    public static function isValid($date)
     {
         $base = self::createFromFormat(static::$format, $date);
         return $base && checkdate($base->format('n'), $base->format('d'), $base->format('Y'));
