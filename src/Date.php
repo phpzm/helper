@@ -39,6 +39,33 @@ class Date extends DateTime
     }
 
     /**
+     * @param string $date
+     * @return string
+     */
+    public static function day(string $date): string
+    {
+        return static::create($date)->format('d');
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function month(string $date): string
+    {
+        return static::create($date)->format('m');
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function year(string $date): string
+    {
+        return static::create($date)->format('Y');
+    }
+
+    /**
      * @return string
      */
     public static function today(): string

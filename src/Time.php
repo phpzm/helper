@@ -2,7 +2,13 @@
 
 namespace Simples\Helper;
 
-class Time extends \DateTime
+use DateTime as NativeDateTime;
+
+/**
+ * Class Time
+ * @package Simples\Helper
+ */
+class Time extends NativeDateTime
 {
     /**
      * @var string
