@@ -4,6 +4,7 @@ namespace Simples\Helper;
 
 use FilesystemIterator;
 use DirectoryIterator;
+use Simples\Error\SimplesRunTimeError;
 
 /**
  * Class Directory
@@ -50,7 +51,7 @@ abstract class Directory
     {
         $files = array_diff(scandir($dir), ['.', '..']);
         foreach ($files as $file) {
-            (is_dir("$dir/$file")) ? self::remove("$dir/$file") : unlink("$dir/$file");
+            (is_dir("$dir/$file")) ? static::remove("$dir/$file") : unlink("$dir/$file");
         }
         return rmdir($dir);
     }
@@ -68,12 +69,13 @@ abstract class Directory
     /**
      * @param string $dir
      * @return array
+     * @throws SimplesRunTimeError
      */
     public static function getFiles(string $dir): array
     {
         $files = [];
-        if (self::exists($dir)) {
-            return $files;
+        if (!static::exists($dir)) {
+            throw new SimplesRunTimeError("Directory `{$dir}` not found");
         }
         foreach (new DirectoryIterator($dir) as $fileInfo) {
             if ($fileInfo->isDot()) {
