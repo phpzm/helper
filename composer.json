@@ -10,7 +10,7 @@
   ],
   "homepage": "https://github.com/phpzm/helper",
   "license": "MIT",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "type": "package",
   "authors": [
     {
@@ -24,7 +24,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "phpzm/kernel": "^1.7.1"
+    "phpzm/kernel": "^1.8.0"
   },
   "autoload": {
     "psr-4": {
