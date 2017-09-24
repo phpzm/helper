@@ -2,6 +2,8 @@
 
 namespace Simples\Helper;
 
+use function strpos;
+
 /**
  * Class Text
  * @package Simples\Helper
@@ -68,5 +70,15 @@ abstract class Text
             $text = static::replace($text, '{' . $key . '}', parse($value));
         }
         return $text;
+    }
+
+    /**
+     * @param string $haystack
+     * @param string $needle
+     * @return bool
+     */
+    public static function contains(string $haystack, string $needle)
+    {
+        return strpos($haystack, $needle) !== false;
     }
 }

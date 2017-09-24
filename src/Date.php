@@ -2,8 +2,14 @@
 
 namespace Simples\Helper;
 
+use function array_reverse;
 use DateInterval;
 use DateTime;
+use function explode;
+use function implode;
+use Simples\Error\SimplesRunTimeError;
+use Simples\Kernel\Wrapper;
+use function stop;
 
 /**
  * Class Date
@@ -20,6 +26,7 @@ class Date extends DateTime
      * Date constructor.
      * @param string $time
      * @param string $format (null)
+     * @throws SimplesRunTimeError
      */
     public function __construct(string $time = 'today', string $format = null)
     {
@@ -120,6 +127,18 @@ class Date extends DateTime
             $next->modify('last day of');
         }
         return $next->format(static::$format);
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function normalize(string $date)
+    {
+        if (Text::contains($date, '/')) {
+            return implode('-', array_reverse(explode('/', $date)));
+        }
+        return $date;
     }
 
     /**
