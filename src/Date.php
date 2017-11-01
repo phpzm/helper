@@ -2,14 +2,9 @@
 
 namespace Simples\Helper;
 
-use function array_reverse;
 use DateInterval;
 use DateTime;
-use function explode;
-use function implode;
 use Simples\Error\SimplesRunTimeError;
-use Simples\Kernel\Wrapper;
-use function stop;
 
 /**
  * Class Date
@@ -130,18 +125,6 @@ class Date extends DateTime
     }
 
     /**
-     * @param string $date
-     * @return string
-     */
-    public static function normalize(string $date)
-    {
-        if (Text::contains($date, '/')) {
-            return implode('-', array_reverse(explode('/', $date)));
-        }
-        return $date;
-    }
-
-    /**
      * @param $date
      * @return int
      */
@@ -172,6 +155,18 @@ class Date extends DateTime
             $compare = new DateTime($compare);
         }
         return (int)parent::diff($compare, $absolute)->format('%d');
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function normalize(string $date)
+    {
+        if (Text::contains($date, '/')) {
+            return implode('-', array_reverse(explode('/', $date)));
+        }
+        return $date;
     }
 
     /**

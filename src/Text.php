@@ -2,8 +2,6 @@
 
 namespace Simples\Helper;
 
-use function strpos;
-
 /**
  * Class Text
  * @package Simples\Helper
