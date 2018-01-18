@@ -23,7 +23,7 @@ class Date extends DateTime
      * @param string $format (null)
      * @throws SimplesRunTimeError
      */
-    public function __construct(string $time = 'today', string $format = null)
+    public function __construct(string $time = 'now', string $format = null)
     {
         parent::__construct($time);
 
@@ -35,7 +35,7 @@ class Date extends DateTime
      * @param string $format (null)
      * @return Date
      */
-    public static function create(string $time = 'today', string $format = null): Date
+    public static function create(string $time = 'now', string $format = null): Date
     {
         return new static($time, $format);
     }
@@ -44,7 +44,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function day(string $time = 'today'): string
+    public static function day(string $time = 'now'): string
     {
         return static::create($time)->format('d');
     }
@@ -53,7 +53,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function week(string $time = 'today'): string
+    public static function week(string $time = 'now'): string
     {
         return static::create($time)->format('W');
     }
@@ -62,7 +62,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function month(string $time = 'today'): string
+    public static function month(string $time = 'now'): string
     {
         return static::create($time)->format('m');
     }
@@ -71,7 +71,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function quarter(string $time = 'today'): string
+    public static function quarter(string $time = 'now'): string
     {
         return (string)ceil(static::create($time)->format('m') / 3);
     }
@@ -80,7 +80,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function year(string $time = 'today'): string
+    public static function year(string $time = 'now'): string
     {
         return static::create($time)->format('Y');
     }
@@ -89,7 +89,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function today(string $time = 'today'): string
+    public static function today(string $time = 'now'): string
     {
         return static::create($time)->format('Y-m-d');
     }
@@ -98,7 +98,7 @@ class Date extends DateTime
      * @param string $time
      * @return string
      */
-    public static function now(string $time = 'today'): string
+    public static function now(string $time = 'now'): string
     {
         return static::create($time)->format('Y-m-d H:i:s');
     }
