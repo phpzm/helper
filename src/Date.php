@@ -41,53 +41,73 @@ class Date extends DateTime
     }
 
     /**
-     * @param string $date
+     * @param string $time
      * @return string
      */
-    public static function day(string $date): string
+    public static function day(string $time = 'today'): string
     {
-        return static::create($date)->format('d');
+        return static::create($time)->format('d');
     }
 
     /**
-     * @param string $date
+     * @param string $time
      * @return string
      */
-    public static function month(string $date): string
+    public static function week(string $time = 'today'): string
     {
-        return static::create($date)->format('m');
+        return static::create($time)->format('W');
     }
 
     /**
-     * @param string $date
+     * @param string $time
      * @return string
      */
-    public static function year(string $date): string
+    public static function month(string $time = 'today'): string
     {
-        return static::create($date)->format('Y');
+        return static::create($time)->format('m');
     }
 
     /**
+     * @param string $time
      * @return string
      */
-    public static function today(): string
+    public static function quarter(string $time = 'today'): string
     {
-        return date('Y-m-d');
+        return (string)ceil(static::create($time)->format('m') / 3);
     }
 
     /**
+     * @param string $time
      * @return string
      */
-    public static function now()
+    public static function year(string $time = 'today'): string
     {
-        return date('Y-m-d H:i:s');
+        return static::create($time)->format('Y');
+    }
+
+    /**
+     * @param string $time
+     * @return string
+     */
+    public static function today(string $time = 'today'): string
+    {
+        return static::create($time)->format('Y-m-d');
+    }
+
+    /**
+     * @param string $time
+     * @return string
+     */
+    public static function now(string $time = 'today'): string
+    {
+        return static::create($time)->format('Y-m-d H:i:s');
     }
 
     /**
      * @param $date
      * @return bool
      */
-    public static function isValid($date)
+    public static function isValid($date): bool
     {
         $base = self::createFromFormat(static::$format, $date);
         return $base && checkdate($base->format('n'), $base->format('d'), $base->format('Y'));
@@ -128,7 +148,7 @@ class Date extends DateTime
      * @param $date
      * @return int
      */
-    public function time($date)
+    public function time($date): int
     {
         return strtotime($date);
     }
@@ -137,7 +157,7 @@ class Date extends DateTime
      * @param $days
      * @return string
      */
-    public function addDays($days)
+    public function addDays($days): string
     {
         $this->add(new DateInterval("P{$days}D"));
 
@@ -149,7 +169,7 @@ class Date extends DateTime
      * @param bool $absolute
      * @return int
      */
-    public function diffDays($compare = 'today', $absolute = false)
+    public function diffDays($compare = 'today', $absolute = false): int
     {
         if (!($compare instanceof DateTime)) {
             $compare = new DateTime($compare);
@@ -161,7 +181,7 @@ class Date extends DateTime
      * @param string $date
      * @return string
      */
-    public static function normalize(string $date)
+    public static function normalize(string $date): string
     {
         if (Text::contains($date, '/')) {
             return implode('-', array_reverse(explode('/', $date)));
@@ -172,7 +192,7 @@ class Date extends DateTime
     /**
      * @return string
      */
-    protected function toString()
+    protected function toString(): string
     {
         return $this->format(static::$format);
     }
@@ -180,7 +200,7 @@ class Date extends DateTime
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }
